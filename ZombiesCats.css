@@ -1,0 +1,98 @@
+html{
+    padding: 0px;
+    margin: 0px;
+}
+.header {
+    text-align: center;
+    margin: 0 auto;
+    background-color: black;
+    color: red;
+    font-family: 'Anton', sans-serif;
+    font-size: 25px;
+    line-height: 2.5;
+}
+
+.title {
+    text-align: center;
+}
+
+.body {
+    text-align: center;
+}
+
+
+
+.ruta {
+    margin: 0 auto;
+    /*width:350px; height:500px; border: 5px solid black; */
+    /*background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+.left {
+
+    width: 50px;
+    height: 50px;
+    transition: .5s;
+    float: left;
+    transform: rotate(180deg);
+    margin-left: 20px;
+    margin-top: 215px;
+    transition: 0.5s;
+    cursor: pointer;
+    background: white;
+}
+
+.right {
+
+    width: 50px;
+    height: 50px;
+    transition: .5s;
+    float: right;
+    margin-right: 20px;
+    margin-top: 215px;
+    cursor: pointer;
+    background: white;
+}
+.up {
+
+    width: 50px;
+    height: 50px;
+    transition: .5s;
+    position: absolute;
+    transform: rotate(270deg);
+    margin-top: 20px;
+    margin-left: 80px;
+    cursor: pointer;
+    background: white;
+}
+
+.down {
+
+    width: 50px;
+    height: 50px;
+    transition: .5s;
+    position: absolute;
+    transform: rotate(90deg);
+    margin-top: 430px;
+    margin-left: 80px;
+    cursor: pointer;
+    background: white;
+}
+
+#candle {
+    width: 80px;
+    height: 150px;
+    
+}
+
+#cat {
+    width: 100px;
+    height: 100px;
+}
+
+#zombie {
+    width: 220px;
+    height: 220px;
+}
