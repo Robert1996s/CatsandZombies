@@ -11,15 +11,72 @@ var zombiey = Math.floor(Math.random() * 6);
 
 var catsfound = 0;
 
-var points = 0;
+let arrayMap = createMap(7,7);
+function createMap(yaxel,xaxel){
+    let arr = new Array(yaxel);
+    for(let y = 0; y < yaxel; y++){
+        arr[y]= new Array(xaxel);
 
-function startGame () {
+        for(let x = 0; x < xaxel ;x++){
+            
+            for (j = 0 ; j < 2 ; j++){
+                arr[y][x] = Math.floor(Math.random() * 2 +1);
+            }
+        }
 
-    newCat();
-    newZombie();
-    
+    }
+    return arr;
 }
 
+startGame();
+function startGame () {
+    newCat();
+    newZombie();
+    insertNav();
+    loadBackground();
+    
+}
+function clearImage(){
+    document.getElementById('spelplan').innerHTML = "";
+}
+function loadBackground(){
+    clearImage();
+    insertNav();
+    let spelplan = document.getElementById('spelplan');
+    let background = document.createElement('img');
+    background.src ="backgrounds/bgimage"+arrayMap[y][x]+".jpg";
+    background.className = 'background-image';
+    spelplan.appendChild(background);
+    console.log(background);
+    
+}
+function insertNav(){
+    let spelplan = document.getElementById('spelplan');
+    let navbttn = document.createElement("button");
+    navbttn.innerHTML = "&#9658";
+    navbttn.id = "up";
+    navbttn.setAttribute("onclick","morey()");
+    spelplan.appendChild(navbttn);
+    
+    navbttn = document.createElement("button");
+    navbttn.innerHTML = "&#9658";
+    navbttn.id = "down";
+    navbttn.setAttribute("onclick","lessy()");
+    spelplan.appendChild(navbttn);
+
+    navbttn = document.createElement("button");
+    navbttn.innerHTML = "&#9658";
+    navbttn.id = "right";
+    navbttn.setAttribute("onclick","morex()");
+    spelplan.appendChild(navbttn);
+
+    navbttn = document.createElement("button");
+    navbttn.innerHTML = "&#9658";
+    navbttn.id = "left";
+    navbttn.setAttribute("onclick","lessx()");
+    spelplan.appendChild(navbttn);
+
+}
 /*funtion morepoints() {
 
     ++points;
@@ -27,24 +84,16 @@ function startGame () {
 }*/
 
 
-/*nopicture();
-function nopicture () {
-
-        document.getElementById('candle').style.display = "none";
-        document.getElementById('cat').style.display = "none";
-        document.getElementById('zombie').style.display = "none";
-        
-}*/
-
 function morex () {
     if (x <= 5) {
     ++x; 
     console.log(x,y);
-    checkforzombie();
+    loadBackground();
     showCat();
     showTorch();
     moveZombie();
-    showImage(x,y);
+    checkforzombie();
+    console.log(caty,catx);
     }
 }
 
@@ -53,11 +102,12 @@ function lessx () {
     if (x > 0) {
     --x; 
     console.log(x,y);
-    checkforzombie();
+    loadBackground();
     showCat();
     showTorch();
     moveZombie();
-    showImage(x,y);
+    checkforzombie();
+    console.log(caty,catx);
     }
 }
 
@@ -65,11 +115,12 @@ function morey () {
     if (y <= 5) {
     ++y; 
     console.log(x,y);
-    checkforzombie();
+    loadBackground();
     showCat();
     showTorch();
     moveZombie();
-    showImage(x,y);
+    checkforzombie();
+    console.log(caty,catx);
     }
 
 }
@@ -78,11 +129,12 @@ function lessy () {
     if (y > 0) {
     --y; 
     console.log(x,y);
-    checkforzombie();
+    loadBackground();
     showCat();
     showTorch();
     moveZombie();
-    showImage(x,y);
+    checkforzombie();
+    console.log(caty,catx);
     }
 
 }
@@ -90,9 +142,9 @@ function lessy () {
 
 
 function newCat() {
+    catx = Math.floor(Math.random() * 7);
+    caty = Math.floor(Math.random() * 7);
 
-    catx = Math.floor(Math.random() * 6);
-    caty = Math.floor(Math.random() * 6);
     
 }
 
@@ -104,26 +156,55 @@ function newZombie() {
 }
 
 function randomxZombie () {
-    return Math.floor(Math.random() *6);
+    return Math.floor(Math.random() *7);
 }
 
 function randomyZombie () {
-    return Math.floor(Math.random() *6);
+    return Math.floor(Math.random() *7);
+}
+
+function zombieFound(){
+    let spelplan = document.getElementById('spelplan');
+    let zombieImage = document.createElement("img");
+    zombieImage.src = 'zombies/zombie.png';
+    zombieImage.id = 'zombies';
+    spelplan.appendChild(zombieImage);
+
 }
 
 
 function checkforzombie () {
     if (zombiex == x && zombiey == y) {
-        console.log("dead");
-        zombieImage();
-        alert("Try again!");
+        zombieFound();
+        console.log('zombie has you');
+        console.log(zombiey,zombiex);
+        console.log(y,x);
+    } else {
+        console.log('no zombie here!');
+    
+    }
+}
+
+function catFound () {
+    let spelplan = document.getElementById('spelplan');
+    let catImage = document.createElement("img");
+    catImage.src = 'zombies/savecat.jpg';
+    catImage.id = 'cat';
+    spelplan.appendChild(catImage);
+}
+
+function showCat () {
+    if (catx == y && caty ==x) {
+        catFound();
+        console.log("Found cat, find next cat!");
+        newCat ();
+        catsfound++;
+        console.log(catsfound + "" + " Cats Found");
+        
+        
     }
 } 
 
-function zombieImage () {
-    document.getElementById('zombie');
-    
-}
 
 
 function moveZombie (){
@@ -149,42 +230,13 @@ function moveZombie (){
 
 
 
-function showCat () {
-    if (catx == x && caty ==y) {
-        console.log("Found cat, find next cat!");
-        newCat ();
-        /*morepoints();*/
-        ++catsfound;
-        console.log(catsfound + "" + " Cats Found");
-    }
-} 
-
 
  function showTorch () {
     if (x == 0 && y == 0) {
         document.getElementById('candle').style.display = "block";
     }
 } 
-
-
-
-  //if (x === 1 && y === 0) {
-    document.getElementById('candle').style.left = "400px";
-
-//}
-
-
-
 function showImage(x,y) {
     document.getElementById("spelplan").style.backgroundImage = "url('" + map[x][y] + "')";
     }
 
-
-var map = [
-    ["Cave.jpg","Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg"],
-    ["Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg"],
-    ["Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg"],
-    ["Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg"],
-    ["Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg"],
-    ["Cave.jpg","Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg"],
-    ["Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg", "Cave.jpg", "Caveklipp1.jpg"] ]; 
