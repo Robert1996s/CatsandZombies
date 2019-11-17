@@ -1,10 +1,13 @@
 body{
     background-color: darkgrey;
 }
+
 html{
     padding: 0px;
     margin: 0px;
-}
+} /*Ger hemsidan ett bra utseende i mobilverision*/
+
+
 .header {
     text-align: center;
     margin: 0 auto;
@@ -27,7 +30,7 @@ html{
 
 .ruta {
     margin: 0 auto;
-}
+}/*Spelrutan i mitten*/
 
 #left {
     z-index: 100;
@@ -74,10 +77,12 @@ html{
     transform: rotate(90deg);
     cursor: pointer;
     background: white;
-}
+} /*Styling av knappar*/
+
 #candle {
     width: 80px;
     height: 150px;
+    z-index: 2;
     
 }
 
@@ -97,7 +102,8 @@ html{
     left: 50px;
     width: 250px;
     height: 250px;
-}
+} /*Ger bilderna storlek och positionering*/
+
 #spelplan{
     width:350px; 
     height:500px; 
